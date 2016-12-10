@@ -31,10 +31,10 @@ protocol From {
 
 // multiple conformances are not allowed in Swift 2.2
 extension MyType : From {
-  associatedtype Value = Int
+  typealias Value = Int
 }
 extension MyType : From {
-  associatedtype Value = Double
+  typealias Value = Double
 }
 
 MyType.Value  // what should that even be?
@@ -88,10 +88,10 @@ struct GoodConverter {
   func convert(x: Double) -> String
 }
 extension GoodConverter : Converter<Int> {
-  associatedtype Result = String  // or it can be inferred
+  typealias Result = String  // or it can be inferred
 }
 extension GoodConverter : Converter<Double> {
-  // associatedtype Result = String  // declarations must not be duplicated
+  // typealias Result = String  // declarations must not be duplicated
 }
 
 struct BadConverter {
@@ -99,10 +99,10 @@ struct BadConverter {
   func convert(x: String) -> Double
 }
 extension BadConverter : Converter<Int> {
-  associatedtype Result = Int  // cannot be inferred
+  typealias Result = Int  // cannot be inferred
 }
 extension BadConverter : Converter<Double> {
-  associatedtype Result = Double  // error: conflicting associatedtype!
+  typealias Result = Double  // error: conflicting associatedtype!
 }
 ```
 
